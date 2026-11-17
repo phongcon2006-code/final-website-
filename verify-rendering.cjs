@@ -1,7 +1,7 @@
 const {root:projectRoot,readSource}=require('./source-sections.cjs');
 
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),path=require('path');
-const {createCanvas,loadImage}=require('../.qa/canvas/node_modules/@napi-rs/canvas');
+const {createCanvas,loadImage}=require(path.join(require('./qa-paths.cjs').qa,'canvas/node_modules/@napi-rs/canvas'));
 let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS '+name);};
 function harness(){
  const display=createCanvas(1200,800),reference=createCanvas(1200,800),frames=new Map(),downloads=[],status={textContent:''};let frameId=0;
@@ -44,8 +44,8 @@ check('PNG export remains pixel-equivalent to the original vector replay',()=>{
  h.run('drawingRaster.getContext("2d").clearRect(0,0,1200,800);downloadDrawing(drawingDraft)');assert.equal(h.downloads[0],h.downloads[1]);
 });
 (async()=>{
- for(const r of JSON.parse(fs.readFileSync(path.join(projectRoot,'assets/shop-references/sources.json'),'utf8'))){
-  const full=await loadImage(path.join(projectRoot,'assets/shop-references',r.images.full.file));const thumb=await loadImage(path.join(projectRoot,'assets/shop-references',r.images.thumb.file));
+ for(const r of JSON.parse(fs.readFileSync(path.join(projectRoot,'assets/shop-sources.json'),'utf8'))){
+  const full=await loadImage(path.join(projectRoot,'assets',r.images.full.file));const thumb=await loadImage(path.join(projectRoot,'assets',r.images.thumb.file));
   assert.equal(full.width,r.images.full.width);assert.equal(full.height,r.images.full.height);assert.equal(thumb.width,r.images.thumb.width);assert.equal(thumb.height,r.images.thumb.height);assert(r.images.thumb.bytes<60000);
  }
  checks++;console.log('PASS all six local photographs and thumbnails decode with reserved dimensions');

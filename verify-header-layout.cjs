@@ -4,7 +4,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict');
 const {pathToFileURL}=require('url'),{spawn}=require('child_process');
 const executable=process.argv[2]||process.env.CHROME_BIN;
 if(!executable)throw Error('Pass a Chrome/headless-shell executable path, or set CHROME_BIN.');
-const qa=path.join(projectRoot,'.qa');fs.mkdirSync(qa,{recursive:true});
+const {qa}=require('./qa-paths.cjs');fs.mkdirSync(qa,{recursive:true});
 const files=['HomePage','index','HistoryPage','ExplorePage','WorkshopPage','ExhibitionPage'];
 const widths=[320,390,768,1199,1200,1440,1920];
 const cases=widths.flatMap(width=>files.flatMap(file=>[false,true].map(large=>({file,width,large}))));
@@ -31,7 +31,13 @@ fs.writeFileSync(fixture,`<!doctype html><html><head><base href="${pathToFileURL
  document.querySelector('#results').textContent=JSON.stringify(results);
 })().catch(error=>document.querySelector('#results').textContent=JSON.stringify({error:String(error)}));
 </script></body></html>`);
-const child=spawn(executable,['--headless','--disable-gpu','--no-first-run','--allow-file-access-from-files','--user-data-dir='+path.join(qa,'header-layout-profile'),'--dump-dom','--timeout=25000','--virtual-time-budget=15000',pathToFileURL(fixture).href],{windowsHide:true});
+const profile=fs.mkdtempSync(path.join(qa,'header-profile-'));
+function cleanupProfile(){
+ const target=path.resolve(profile),parent=path.resolve(qa);
+ if(path.dirname(target)!==parent||!path.basename(target).startsWith('header-profile-'))throw Error('Unexpected browser profile path');
+ fs.rmSync(target,{recursive:true,force:true,maxRetries:5,retryDelay:200});
+}
+const child=spawn(executable,['--headless','--disable-gpu','--no-first-run','--allow-file-access-from-files','--user-data-dir='+profile,'--dump-dom','--timeout=25000','--virtual-time-budget=15000',pathToFileURL(fixture).href],{windowsHide:true});
 let stdout='',stderr='';child.stdout.on('data',chunk=>stdout+=chunk);child.stderr.on('data',chunk=>stderr+=chunk);
 const timer=setTimeout(()=>{child.kill();console.error('Header layout browser timed out.');process.exitCode=1;},35000);
 child.on('error',error=>{clearTimeout(timer);console.error(error);process.exitCode=1;});
@@ -75,4 +81,5 @@ child.on('close',code=>{
   fs.writeFileSync(path.join(qa,'header-layout-results.json'),JSON.stringify(results,null,2));
   console.log('PASS '+results.length+' browser layouts: six entries, seven viewport widths, both Aa sizes; shared desktop menu 590 x 64, mobile menu and Escape.');
  }catch(error){console.error(error);process.exitCode=1;}
+ finally{try{cleanupProfile();}catch(error){console.error('Could not remove temporary browser profile:',error);process.exitCode=1;}}
 });

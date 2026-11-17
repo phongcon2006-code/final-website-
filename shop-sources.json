@@ -1,0 +1,122 @@
+[
+    {
+        "permission":  "User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.",
+        "source":  "https://bizweb.dktcdn.net/100/438/304/products/tranh-giay-dong-ho-ga-dai-cat-37x52.jpg",
+        "id":  "ga-dai-cat",
+        "images":  {
+                       "full":  {
+                                    "width":  1024,
+                                    "file":  "ga-dai-cat-full.jpg",
+                                    "height":  768,
+                                    "bytes":  139081
+                                },
+                       "thumb":  {
+                                     "width":  360,
+                                     "file":  "ga-dai-cat-thumb.jpg",
+                                     "height":  270,
+                                     "bytes":  15555
+                                 }
+                   },
+        "product":  "https://tranhdangiandongho.com/tranh-giay-dong-ho-ga-dai-cat-37cm-x-52cm"
+    },
+    {
+        "permission":  "User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.",
+        "source":  "https://bizweb.dktcdn.net/100/438/304/products/tranh-giay-dong-ho-dan-lon-am-duong-52x37.jpg",
+        "id":  "dan-lon-am-duong",
+        "images":  {
+                       "full":  {
+                                    "width":  1024,
+                                    "file":  "dan-lon-am-duong-full.jpg",
+                                    "height":  767,
+                                    "bytes":  226115
+                                },
+                       "thumb":  {
+                                     "width":  360,
+                                     "file":  "dan-lon-am-duong-thumb.jpg",
+                                     "height":  270,
+                                     "bytes":  29386
+                                 }
+                   },
+        "product":  "https://tranhdangiandongho.com/tranh-giay-dong-ho-dan-lon-am-duong-52cm-x-37cm"
+    },
+    {
+        "permission":  "User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.",
+        "source":  "https://bizweb.dktcdn.net/100/438/304/products/tranh-giay-dong-ho-chan-trau-thoi-sao-37x52.jpg",
+        "id":  "chan-trau-thoi-sao",
+        "images":  {
+                       "full":  {
+                                    "width":  1024,
+                                    "file":  "chan-trau-thoi-sao-full.jpg",
+                                    "height":  768,
+                                    "bytes":  125894
+                                },
+                       "thumb":  {
+                                     "width":  360,
+                                     "file":  "chan-trau-thoi-sao-thumb.jpg",
+                                     "height":  270,
+                                     "bytes":  15240
+                                 }
+                   },
+        "product":  "https://tranhdangiandongho.com/tranh-giay-dong-ho-chan-trau-thoi-sao-37cm-x-52cm"
+    },
+    {
+        "permission":  "User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.",
+        "source":  "https://bizweb.dktcdn.net/100/438/304/products/tranh-giay-dong-ho-vinh-hoa-em-be-om-ga-37x52.jpg",
+        "id":  "vinh-hoa",
+        "images":  {
+                       "full":  {
+                                    "width":  1024,
+                                    "file":  "vinh-hoa-full.jpg",
+                                    "height":  768,
+                                    "bytes":  137175
+                                },
+                       "thumb":  {
+                                     "width":  360,
+                                     "file":  "vinh-hoa-thumb.jpg",
+                                     "height":  270,
+                                     "bytes":  16226
+                                 }
+                   },
+        "product":  "https://tranhdangiandongho.com/tranh-giay-dong-ho-vinh-hoa-em-be-om-ga-37cm-x-52cm"
+    },
+    {
+        "permission":  "User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.",
+        "source":  "https://bizweb.dktcdn.net/100/438/304/products/tranh-giay-dong-ho-phu-quy-em-be-om-vit-37x52.jpg",
+        "id":  "phu-quy",
+        "images":  {
+                       "full":  {
+                                    "width":  1024,
+                                    "file":  "phu-quy-full.jpg",
+                                    "height":  768,
+                                    "bytes":  134815
+                                },
+                       "thumb":  {
+                                     "width":  360,
+                                     "file":  "phu-quy-thumb.jpg",
+                                     "height":  270,
+                                     "bytes":  15291
+                                 }
+                   },
+        "product":  "https://tranhdangiandongho.com/tranh-giay-dong-ho-phu-quy-em-be-om-vit-37cm-x-52cm"
+    },
+    {
+        "permission":  "User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.",
+        "source":  "https://bizweb.dktcdn.net/100/438/304/products/tranh-giay-dong-ho-dam-cuoi-chuot-52x37.jpg",
+        "id":  "dam-cuoi-chuot",
+        "images":  {
+                       "full":  {
+                                    "width":  1024,
+                                    "file":  "dam-cuoi-chuot-full.jpg",
+                                    "height":  767,
+                                    "bytes":  283105
+                                },
+                       "thumb":  {
+                                     "width":  360,
+                                     "file":  "dam-cuoi-chuot-thumb.jpg",
+                                     "height":  270,
+                                     "bytes":  36013
+                                 }
+                   },
+        "product":  "https://tranhdangiandongho.com/tranh-giay-dong-ho-dam-cuoi-chuot-52cm-x-37cm"
+    }
+]

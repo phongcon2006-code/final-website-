@@ -2,7 +2,7 @@
 
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
-$assetDirectory = Join-Path (Split-Path -Parent $PSScriptRoot) 'assets/shop-references'
+$assetDirectory = Join-Path (Split-Path -Parent $PSScriptRoot) 'assets'
 [System.IO.Directory]::CreateDirectory($assetDirectory) | Out-Null
 $references = @(
     @('ga-dai-cat', 'ga-dai-cat-37x52', 'ga-dai-cat-37cm-x-52cm'),
@@ -40,5 +40,5 @@ $manifest = foreach ($reference in $references) {
     @{id=$reference[0];source=$source;product=('https://tranhdangiandongho.com/tranh-giay-dong-ho-' + $reference[2]);permission='User confirmed permission to reuse shop photographs, 2026-11-08. Not CC0.';images=$sizes}
 }
 $json = ConvertTo-Json -Depth 5 -InputObject @($manifest)
-[System.IO.File]::WriteAllText((Join-Path $assetDirectory 'sources.json'),$json,[System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::WriteAllText((Join-Path $assetDirectory 'shop-sources.json'),$json,[System.Text.UTF8Encoding]::new($false))
 $manifest | ForEach-Object { Write-Output ($_.id + ': thumbnail ' + $_.images.thumb.bytes + ' bytes; full ' + $_.images.full.bytes + ' bytes') }

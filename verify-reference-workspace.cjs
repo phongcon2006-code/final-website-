@@ -18,12 +18,12 @@ check('updated references and existing museum lessons retain progress on reload'
 });
 check('pickers load thumbnails only; selected photographs use title-only captions',()=>{
  const h=harness({page:'workshop'});h.guide();let html=h.run('renderDrawingGuide()');assert(html.includes('mouse-wedding-thumb.jpg'));assert(!html.includes('mouse-wedding-museum.jpg'));
- h.click('guide-collection-free');for(const mood of h.run('INSPIRATION_MOODS')){h.c.id=mood.id;h.run('chooseInspirationMood(id)');html=h.run('renderDrawingGuide()');assert(!html.includes('-full.jpg'));assert.equal((html.match(/loading="lazy"/g)||[]).length,3);assert(!html.includes('assets/inspiration/'));}
+ h.click('guide-collection-free');for(const mood of h.run('INSPIRATION_MOODS')){h.c.id=mood.id;h.run('chooseInspirationMood(id)');html=h.run('renderDrawingGuide()');assert(!html.includes('-full.jpg'));assert.equal((html.match(/loading="lazy"/g)||[]).length,3);assert(!/<img\b[^>]*\bsrc="assets\/[^"]+\.svg"/i.test(html));}
  h.run("chooseInspirationExample('phu-quy')");html=h.run('renderDrawingGuide()');assert(html.includes('phu-quy-full.jpg'));assert(!html.includes('ga-dai-cat-full.jpg'));assert(html.includes('Enlarge reference'));assert(!html.includes('Used with permission'));assert(!html.includes('Source &amp; image credit'));assert(!html.includes('CC0'));assert(!html.includes('Museum of Fine Arts'));
 });
 check('viewer opens at Fit, zooms within limits, resets scroll and restores focus',()=>{
  const h=actionHarness(),opener=h.get('#enlarge-reference');h.c.opener=opener;h.run("bindReferenceViewer();openReferenceViewer('ga-dai-cat',opener)");
- const dialog=h.get('#reference-viewer');assert(dialog.open);assert.equal(h.focused(),h.get('#reference-close'));assert.equal(h.get('#reference-image').src,'assets/shop-references/ga-dai-cat-full.jpg');assert.equal(h.get('#reference-viewer-title').textContent,h.run("drawingPhotoReference('ga-dai-cat').title"));assert(!h.run('referenceViewerMarkup()').includes('reference-source'));
+ const dialog=h.get('#reference-viewer');assert(dialog.open);assert.equal(h.focused(),h.get('#reference-close'));assert.equal(h.get('#reference-image').src,'assets/ga-dai-cat-full.jpg');assert.equal(h.get('#reference-viewer-title').textContent,h.run("drawingPhotoReference('ga-dai-cat').title"));assert(!h.run('referenceViewerMarkup()').includes('reference-source'));
  assert.equal(h.get('#reference-zoom').textContent,'100%');assert(h.get('#reference-out').disabled);const fitWidth=parseFloat(h.get('#reference-image').style.width);
  h.get('#reference-in').emit('click');assert.equal(h.get('#reference-zoom').textContent,'150%');assert(parseFloat(h.get('#reference-image').style.width)>fitWidth);
  for(let i=0;i<12;i++)h.get('#reference-in').emit('click');assert.equal(dialog.referenceZoom,4);assert(h.get('#reference-in').disabled);
@@ -65,6 +65,6 @@ check('runtime teardown flushes metadata and removes lifecycle subscriptions',()
 });
 check('generated pages retain resource order and source metadata identifies all six assets',()=>{
  for(const page of ['HomePage','HistoryPage','ExplorePage','WorkshopPage','ExhibitionPage','index'])assertEntry(readSource(page+'.html'));assertOrder(['drawing-runtime.js','shop-reference-data.js','drawing-inspiration.js','reference-viewer.js','drawing-guide.js','app.js']);
- const manifest=JSON.parse(fs.readFileSync(path.join(projectRoot,'assets/shop-references/sources.json'),'utf8'));assert.equal(manifest.length,6);for(const r of manifest){assert(r.permission.includes('User confirmed'));assert(r.source.startsWith('https://bizweb.dktcdn.net/'));assert(r.product.startsWith('https://tranhdangiandongho.com/'));}
+ const manifest=JSON.parse(fs.readFileSync(path.join(projectRoot,'assets/shop-sources.json'),'utf8'));assert.equal(manifest.length,6);for(const r of manifest){assert(r.permission.includes('User confirmed'));assert(r.source.startsWith('https://bizweb.dktcdn.net/'));assert(r.product.startsWith('https://tranhdangiandongho.com/'));}
 });
 console.log(`\n${checks} reference-workspace checks passed. Browser layout, native focus containment and touch still require visual acceptance.`);
