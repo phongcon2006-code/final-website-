@@ -1,0 +1,9 @@
+<!doctype html><html><head><base href="file:///C:/Users/phong/Downloads/ux/dong-ho-studio/"></head><body><pre id="results"></pre><script>
+const entries=[{"file":"HomePage","large":false},{"file":"HomePage","large":true},{"file":"HistoryPage","large":false},{"file":"HistoryPage","large":true},{"file":"ExplorePage","large":false},{"file":"ExplorePage","large":true},{"file":"WorkshopPage","large":false},{"file":"WorkshopPage","large":true},{"file":"ExhibitionPage","large":false},{"file":"ExhibitionPage","large":true}],results=[];
+for(const entry of entries){
+ const frame=document.createElement('iframe');frame.width=1440;frame.height=900;
+ frame.onload=()=>{const doc=frame.contentDocument;doc.documentElement.style.setProperty('--font',entry.large?'18px':'16px');
+ setTimeout(()=>{const nav=doc.querySelector('#site-navigation'),r=nav.getBoundingClientRect();results.push({...entry,width:r.width,height:r.height,font:frame.contentWindow.getComputedStyle(nav.querySelector('a')).fontSize});document.getElementById('results').textContent=JSON.stringify(results);},100);};
+ frame.src=entry.file+'.html';document.body.append(frame);
+}
+</script></body></html>
